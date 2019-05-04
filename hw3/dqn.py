@@ -252,7 +252,7 @@ class QLearner(object):
       obs=self.replay_buffer.encode_recent_observation()
       act = self.session.run(self.max_a, feed_dict={self.obs_t_ph: [ obs ]})
       act = act[0]
-      if random.random() < (self.num_actions/(self.num_actions-1))*self.exploration.value(self.t):
+      if random.random() < self.exploration.value(self.t):
         act = random.randint(0, self.num_actions - 1)
 
     else:
